@@ -26,5 +26,4 @@ class MyTopo( Topo ):
         self.addLink(H2, S1)
         self.addLink(H3, S2)
 
-
 topos = { 'mytopo': ( lambda: MyTopo() ) }

@@ -1,4 +1,4 @@
-#Create a star topology with 1 switches and 6 hosts
+#Create a  topology with 1 switches and 6 hosts
 
 import pdb
 from mininet.topo import Topo
