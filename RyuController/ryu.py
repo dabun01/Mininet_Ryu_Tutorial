@@ -1,5 +1,5 @@
 #This file is used to define the Ryu controller class. And should allow us to use the Ryu controller in our Mininet topology.
-#And call it in the command line with "sudo mn --custom pox.py --controller pox"
+#And call it in the command line with "sudo mn --custom ryu.py --controller ryu"
 from mininet.node import Controller
 from os import environ
 

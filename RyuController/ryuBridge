@@ -1,0 +1,46 @@
+from mininet.net import Mininet
+from mininet.node import Controller
+from mininet.topo import SingleSwitchTopo
+from mininet.log import setLogLevel
+import os
+
+class RyuBridge(Controller):
+    """
+    Custom Controller class to invoke Ryu's simple_switch_13 application.
+    """
+    def __init__(self, name, cdir=None, command='ryu-manager', app='ryu.app.simple_switch_13', **kwargs):
+        """
+        Initialize the Ryu controller.
+        :param name: Name of the controller.
+        :param cdir: Directory for the Ryu controller (default is None).
+        :param command: Command to start Ryu (default is 'ryu-manager').
+        :param app: Ryu application to run (default is 'ryu.app.simple_switch_13').
+        """
+        cdir = cdir or os.environ['HOME'] + '/ryu'
+        Controller.__init__(self, name, cdir=cdir, command=command, cargs=app, **kwargs)
+
+    def start(self):
+        #Start the Ryu controller.
+        self.cmd(self.command, self.cargs, '&')
+
+    def stop(self):
+        #Stop the Ryu controller.
+        self.cmd('kill %' + self.command)
+
+# Define the controller dictionary to register the custom Ryu controller
+controllers = {'ryubridge': RyuBridge}
+
+if __name__ == '__main__':
+    setLogLevel('info')
+
+    # Create a Mininet network with a single switch topology and the RyuBridge controller
+    net = Mininet(topo=SingleSwitchTopo(2), controller=RyuBridge)
+
+    # Start the network
+    net.start()
+
+    # Test connectivity
+    net.pingAll()
+
+    # Stop the network
+    net.stop()

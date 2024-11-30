@@ -15,8 +15,8 @@ class MyTopo( Topo ):
         S2 = self.addSwitch('s2')
         S3 = self.addSwitch('s3')
         S4 = self.addSwitch('s4')
-        H1 = self.addHost('h1', ip='10.0.0.1/24')
-        H2 = self.addHost('h2', ip='10.0.0.100/24')
+        H1 = self.addHost('h1', ip='10.0.0.3/24')
+        H2 = self.addHost('h2', ip='10.0.0.4/24')
         SwitchList = [S1, S2, S3, S4]
 
         #Add links this for loop will create a mesh topology
