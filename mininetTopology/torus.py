@@ -12,46 +12,47 @@ class MyTopo( Topo ):
 
         #Add 12 switches
         H1 = self.addHost('h1',ip="10.0.0.3")
+        H2 = self.addHost('h2', ip="10.0.0.4")
+        H3 = self.addHost('h3',ip="10.0.0.6")
+        H4 = self.addHost('h4',ip="10.0.0.5")
         S2 = self.addSwitch('s2')
         S3 = self.addSwitch('s3')
-        S4 = self.addHost('h3',ip="10.0.0.6")
         S5 = self.addSwitch('s5')
         S6 = self.addSwitch('s6')
         S7 = self.addSwitch('s7')
         S8 = self.addSwitch('s8')
-        S9 = self.addHost('h4',ip="10.0.0.5")
         S10 = self.addSwitch('s10')
         S11 = self.addSwitch('s11')
-        H2 = self.addHost('h2', ip="10.0.0.4")
+        
 
         #Connect the switches in a torus topology
         #First row
         self.addLink(H1, S2)
         self.addLink(S2, S3)
-        self.addLink(S3, S4)
-        self.addLink(S4, H1)
+        self.addLink(S3, H3)
+        self.addLink(H3, H1)
         #Second row
         self.addLink(S5, S6)
         self.addLink(S6, S7)
         self.addLink(S7, S8)
         self.addLink(S8, S5)
         #Third row
-        self.addLink(S9, S10)
+        self.addLink(H4, S10)
         self.addLink(S10, S11)
         self.addLink(S11, H2)
-        self.addLink(H2, S9)
+        self.addLink(H2, H4)
         #Connect row 1 to row 2
         self.addLink(H1, S5)
         self.addLink(S2, S6)
         self.addLink(S3, S7)
-        self.addLink(S4, S8)
+        self.addLink(H3, S8)
         #Connect row 1 to row 3
-        self.addLink(H1, S9)
+        self.addLink(H1, H4)
         self.addLink(S2, S10)
         self.addLink(S3, S11)
-        self.addLink(S4, H2)
+        self.addLink(H3, H2)
         #Connect row 2 to row 3
-        self.addLink(S5, S9)
+        self.addLink(S5, H4)
         self.addLink(S6, S10)
         self.addLink(S7, S11)
         self.addLink(S8, H2)
