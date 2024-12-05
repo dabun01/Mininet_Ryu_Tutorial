@@ -23,6 +23,8 @@ class MyTopo( Topo ):
         for index in range(0, len(SwitchList)):
             for index2 in range(index+1, len(SwitchList)):
                 self.addLink(SwitchList[index], SwitchList[index2])
+
+        #Connect the hosts to the switches
         self.addLink(H1, S1)
         self.addLink(H2, S3)
 
